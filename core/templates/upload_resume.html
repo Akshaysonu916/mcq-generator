@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Upload</title>
+</head>
+<body>
+    <h2>Upload Resume</h2>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="resume" accept=".pdf,.docx" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if detected_domain %}
+        <h3>Detected Domain:</h3>
+        <p>{{ detected_domain }}</p>
+
+        <h3>Extracted Resume Text:</h3>
+        <pre>{{ resume_text }}</pre>
+    {% endif %}
+</body>
+</html>

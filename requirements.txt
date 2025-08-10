@@ -1,0 +1,7 @@
+Django==5.0
+djangorestframework
+python-docx
+PyMuPDF
+Pillow
+pytesseract
+python-dotenv
