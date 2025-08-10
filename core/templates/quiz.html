@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <script>
+        let timeLeft = {{ time_limit }};
+        function updateTimer() {
+            document.getElementById("timer").innerHTML = timeLeft + " seconds remaining";
+            if (timeLeft <= 0) {
+                document.getElementById("quizForm").submit();
+            }
+            timeLeft--;
+        }
+        setInterval(updateTimer, 1000);
+    </script>
+</head>
+<body>
+    <h2>Quiz - {{ request.session.domain }}</h2>
+    <p id="timer"></p>
+    <form id="quizForm" method="post" action="{% url 'submit_quiz' %}">
+        {% csrf_token %}
+        {% for q in questions %}
+            <p><b>{{ forloop.counter }}. {{ q.question }}</b></p>
+            {% for opt in q.options %}
+                <label>
+                    <input type="radio" name="q{{ forloop.parentloop.counter0 }}" value="{{ opt }}" required>
+                    {{ opt }}
+                </label><br>
+            {% endfor %}
+        {% endfor %}
+        <br>
+        <button type="submit">Submit Quiz</button>
+    </form>
+</body>
+</html>

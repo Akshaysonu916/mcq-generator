@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analysis Result</title>
+</head>
+<body>
+    <h1>Resume Analysis</h1>
+
+    <h2>Detected Domain: {{ detected_domain }}</h2>
+    <pre>{{ resume_text }}</pre>
+
+    {% if detected_domain != "Unknown" %}
+        <form action="{% url 'start_quiz' detected_domain %}" method="get">
+            <button type="submit">Start Quiz</button>
+        </form>
+    {% else %}
+        <p>No domain detected. Cannot start quiz.</p>
+    {% endif %}
+</body>
+</html>
